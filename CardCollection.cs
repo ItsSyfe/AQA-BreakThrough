@@ -130,7 +130,8 @@ namespace Breakthrough
             }
             return CardDisplay;
         }
-
+        
+        #region task 4
         // task 4
         public List<Card> getAllCards()
         {
@@ -141,7 +142,9 @@ namespace Breakthrough
         {
             this.Cards.AddRange(Cards);
         }
+        #endregion
         
+        #region task 6
         // task 6
         public double getCardStats(string cardLetter)
         {
@@ -149,5 +152,6 @@ namespace Breakthrough
             int cardCount = Cards.Count(card => card.GetDescription().StartsWith(cardLetter));
             return Math.Round((float)cardCount / GetNumberOfCards() * 100, 1);
         }
+        #endregion
     }
 }

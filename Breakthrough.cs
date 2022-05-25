@@ -72,6 +72,7 @@ namespace Breakthrough
                                     break;
                                 }
 
+                            #region task 2
                             // task 2
                             case "P":
                                 {
@@ -87,7 +88,9 @@ namespace Breakthrough
                                     CurrentLock.PeekUsed = true;
                                     break;
                                 }
+                            #endregion
 
+                            #region task 4
                             // task 4
                             case "M":
                                 {
@@ -121,7 +124,9 @@ namespace Breakthrough
                                     mulliganUsed = true;
                                     break;
                                 }
+                            #endregion
                             
+                            #region task 5
                             // task 5
                             case "Q":
                             {
@@ -136,6 +141,7 @@ namespace Breakthrough
                                 quitting = true;
                                 break;
                             }
+                            #endregion
 
                         }
                         if (CurrentLock.GetLockSolved())
@@ -212,10 +218,12 @@ namespace Breakthrough
                     Score += MoveCard(Hand, Sequence, Hand.GetCardNumberAt(cardChoice - 1));
                     GetCardFromDeck(cardChoice);
                 }
+                #region task 3
                 else
                 {
                     Console.WriteLine($"Error you cannot play two consecutive cards of the same tool type, you've tried to play {Hand.GetCardDescriptionAt(cardChoice - 1)}"); // task 3
                 }
+                #endregion
             }
             else
             {
@@ -381,6 +389,7 @@ namespace Breakthrough
                     Console.Write("To deal with this you need to either lose a key ");
                     Console.Write("(enter 1-5 to specify position of key) or (D)iscard five cards from the deck:> ");
                     
+                    #region task 6
                     // task 6
                     StringBuilder sb = new StringBuilder();
 
@@ -391,6 +400,7 @@ namespace Breakthrough
                     sb.AppendLine($"Currently in the Deck there is a {Convert.ToString(Deck.getCardStats("P"))}% chance of gettting a Pick");
                     
                     Console.WriteLine(sb.ToString());
+                    #endregion
                     
                     string Choice = Console.ReadLine();
                     Console.WriteLine();
@@ -454,6 +464,7 @@ namespace Breakthrough
         {
             Console.WriteLine();
 
+            #region task 2 and 4
             StringBuilder stringBuilder = new StringBuilder("(D)iscard inspect, (U)se card");
 
             // task 2
@@ -464,6 +475,7 @@ namespace Breakthrough
             stringBuilder.Append(", (Q)uit:> ");
 
             Console.WriteLine(stringBuilder);
+            #endregion
 
             string Choice = Console.ReadLine().ToUpper();
             return Choice;
