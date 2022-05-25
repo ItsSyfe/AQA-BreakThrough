@@ -464,7 +464,7 @@ namespace Breakthrough
         {
             Console.WriteLine();
 
-            #region task 2 and 4
+            #region task 2, 4 and 5
             StringBuilder stringBuilder = new StringBuilder("(D)iscard inspect, (U)se card");
 
             // task 2
@@ -472,6 +472,7 @@ namespace Breakthrough
             // task 4
             if (!mulliganUsed) stringBuilder.Append(", (M)ulligan");
 
+            // task 5
             stringBuilder.Append(", (Q)uit:> ");
 
             Console.WriteLine(stringBuilder);
