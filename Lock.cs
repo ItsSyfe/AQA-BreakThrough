@@ -27,7 +27,7 @@ namespace Breakthrough
             return ConditionAsString;
         }
 
-        public virtual string GetLockDetails()
+        public virtual string GetLockDetails(CardCollection Sequence)
         {
             string LockDetails = Environment.NewLine + "CURRENT LOCK" + Environment.NewLine + "------------" + Environment.NewLine;
             foreach (var C in Challenges)
@@ -38,7 +38,21 @@ namespace Breakthrough
                 }
                 else
                 {
-                    LockDetails += "Not met:       ";
+                    // task 8
+                    List<string> ChallengeConditions = C.GetCondition();
+                    if (Sequence.GetNumberOfCards() > 0 && ChallengeConditions.Count == 2 && ChallengeConditions[0] == Sequence.getAllCards()[^1].GetDescription())
+                    {
+                        LockDetails += "Partially met: ";
+                    } 
+                    else if (Sequence.GetNumberOfCards() > 1 && ChallengeConditions.Count == 3 && ChallengeConditions[0] == Sequence.getAllCards()[^2].GetDescription() && ChallengeConditions[1] == Sequence.getAllCards()[^1].GetDescription())
+                    {
+                        LockDetails += "Partially met: ";
+                    }
+                    
+                    else
+                    {
+                        LockDetails += "Not met:       ";
+                    }
                 }
                 LockDetails += ConvertConditionToString(C.GetCondition()) + Environment.NewLine;
             }

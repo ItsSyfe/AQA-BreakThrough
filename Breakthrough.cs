@@ -46,7 +46,7 @@ namespace Breakthrough
                     {
                         Console.WriteLine();
                         Console.WriteLine("Current score: " + Score);
-                        Console.WriteLine(CurrentLock.GetLockDetails());
+                        Console.WriteLine(CurrentLock.GetLockDetails(Sequence)); // task 8
                         Console.WriteLine(Sequence.GetCardDisplay());
                         Console.WriteLine(Hand.GetCardDisplay());
                         Console.WriteLine($"There are {Convert.ToString(Deck.GetNumberOfCards())} cards left in the deck"); // task 1
@@ -162,6 +162,7 @@ namespace Breakthrough
             CurrentLock.PeekUsed = false;
             Score += 10;
             Console.WriteLine("Lock has been solved.  Your score is now: " + Score);
+            AddMultiCardsToDeck(); // task 7
             while (Discard.GetNumberOfCards() > 0)
             {
                 MoveCard(Discard, Deck, Discard.GetCardNumberAt(0));
@@ -204,6 +205,7 @@ namespace Breakthrough
                     MoveCard(Deck, Hand, Deck.GetCardNumberAt(0));
                 }
                 AddDifficultyCardsToDeck();
+                AddMultiCardsToDeck(); // task 7
                 Deck.Shuffle();
                 CurrentLock = GetRandomLock();
             }
@@ -211,6 +213,22 @@ namespace Breakthrough
 
         private void PlayCardToSequence(int cardChoice)
         {
+            // task 7
+            bool isMultiCard = checkMultiCard(cardChoice);
+            if (isMultiCard)
+            {
+                MoveCard(Hand, Sequence, Hand.GetCardNumberAt(cardChoice - 1));
+                GetCardFromDeck(cardChoice);
+                
+                if (CheckIfLockChallengeMet())
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("A challenge on the lock has been met.");
+                    Console.WriteLine();
+                }
+                return;
+            }
+            
             if (Sequence.GetNumberOfCards() > 0)
             {
                 if (Hand.GetCardDescriptionAt(cardChoice - 1)[0] != Sequence.GetCardDescriptionAt(Sequence.GetNumberOfCards() - 1)[0])
@@ -540,6 +558,20 @@ namespace Breakthrough
                 }
             }
             return Score;
+        }
+
+        // task 7
+        private void AddMultiCardsToDeck()
+        {
+            Deck.AddCard(new ToolCard("P", "m", true));
+            Deck.AddCard(new ToolCard("K", "m", true));
+            Deck.AddCard(new ToolCard("F", "m", true));
+        }
+        
+        // task 7
+        private bool checkMultiCard(int cardChoice)
+        {
+            return Hand.assignToolKitAt(cardChoice);
         }
     }
 }

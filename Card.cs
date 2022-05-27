@@ -39,5 +39,11 @@
                 return CardNumber.ToString();
             }
         }
+
+        // task 7
+        public virtual bool updateMultiToolKit()
+        {
+            return false;
+        }
     }
 }

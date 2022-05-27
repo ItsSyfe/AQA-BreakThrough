@@ -153,5 +153,11 @@ namespace Breakthrough
             return Math.Round((float)cardCount / GetNumberOfCards() * 100, 1);
         }
         #endregion
+        
+        // task 7
+        public bool assignToolKitAt(int cardLoc)
+        {
+            return Cards.ElementAt(cardLoc - 1).updateMultiToolKit();
+        }
     }
 }
